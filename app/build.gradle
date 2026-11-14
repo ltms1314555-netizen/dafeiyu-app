@@ -18,7 +18,7 @@ android {
     // 固定签名：以后改一版重新编译，直接覆盖安装，不用先卸载
     signingConfigs {
         app {
-            storeFile file('dafeiyu.jks')
+            storeFile rootProject.file('dafeiyu.jks')
             storePassword 'dafeiyu2026'
             keyAlias 'dafeiyu'
             keyPassword 'dafeiyu2026'
