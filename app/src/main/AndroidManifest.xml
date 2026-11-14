@@ -4,8 +4,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:label="大肥鱼"
-        android:icon="@android:drawable/sym_def_app_icon"
+        android:label="鱼窝"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
         android:usesCleartextTraffic="true"
         android:theme="@android:style/Theme.Material.Light.NoActionBar">
         <activity
