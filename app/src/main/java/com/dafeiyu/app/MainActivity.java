@@ -146,6 +146,20 @@ public class MainActivity extends Activity {
         return tv;
     }
 
+    /** 去掉 QQ 用的表情 / 语音标记，App 里显示成乱码不好看 */
+    private static String clean(String text) {
+        if (text == null) return "";
+        String out = text
+                .replaceAll("<face:[^>]*>", "")
+                .replaceAll("<sticker:[^>]*>", "")
+                .replaceAll("<[a-zA-Z]+:[^>]*>", "")
+                .replace("<voice>", "")
+                .replace("</voice>", "")
+                .replace("[沉默]", "")
+                .trim();
+        return out.isEmpty() ? "（她这次只发了个表情）" : out;
+    }
+
     private void addMessage(String text, boolean mine) {
         list.addView(bubble(text, mine, false));
         scrollDown();
