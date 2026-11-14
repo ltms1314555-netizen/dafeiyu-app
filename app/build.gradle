@@ -1,5 +1,8 @@
 plugins { id 'com.android.application' }
 
+// 每次 Actions 运行号都往上加，这样新包才能覆盖安装（不然安卓会报「应用未安装」）
+def runNumber = (System.getenv('GITHUB_RUN_NUMBER') ?: '1').toInteger()
+
 android {
     namespace 'com.dafeiyu.app'
     compileSdk 34
@@ -8,12 +11,28 @@ android {
         applicationId "com.dafeiyu.app"
         minSdk 24
         targetSdk 34
-        versionCode 1
-        versionName "0.1"
+        versionCode runNumber
+        versionName "0.1.${runNumber}"
+    }
+
+    // 固定签名：以后改一版重新编译，直接覆盖安装，不用先卸载
+    signingConfigs {
+        app {
+            storeFile file('dafeiyu.jks')
+            storePassword 'dafeiyu2026'
+            keyAlias 'dafeiyu'
+            keyPassword 'dafeiyu2026'
+        }
     }
 
     buildTypes {
-        release { minifyEnabled false }
+        debug {
+            signingConfig signingConfigs.app
+        }
+        release {
+            signingConfig signingConfigs.app
+            minifyEnabled false
+        }
     }
 
     compileOptions {
